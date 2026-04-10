@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentic AI Roadmap 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #050810;
+    --surface: #0c1120;
+    --border: #1a2540;
+    --accent: #00f5c4;
+    --accent2: #7b61ff;
+    --accent3: #ff6b35;
+    --text: #e2e8f8;
+    --muted: #5a6a8a;
+    --glow: 0 0 20px rgba(0,245,196,0.3);
+  }
+
+- { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+background: var(–bg);
+color: var(–text);
+font-family: ‘Syne’, sans-serif;
+min-height: 100vh;
+overflow-x: hidden;
+}
+
+/* Background grid */
+body::before {
+content: ‘’;
+position: fixed;
+inset: 0;
+background-image:
+linear-gradient(rgba(0,245,196,0.03) 1px, transparent 1px),
+linear-gradient(90deg, rgba(0,245,196,0.03) 1px, transparent 1px);
+background-size: 40px 40px;
+pointer-events: none;
+z-index: 0;
+}
+
+.container {
+max-width: 960px;
+margin: 0 auto;
+padding: 48px 24px 80px;
+position: relative;
+z-index: 1;
+}
+
+/* Header */
+header {
+text-align: center;
+margin-bottom: 64px;
+animation: fadeDown 0.8s ease both;
+}
+
+.badge {
+display: inline-block;
+font-family: ‘Space Mono’, monospace;
+font-size: 11px;
+letter-spacing: 3px;
+color: var(–accent);
+border: 1px solid var(–accent);
+padding: 6px 16px;
+margin-bottom: 20px;
+text-transform: uppercase;
+}
+
+h1 {
+font-size: clamp(36px, 6vw, 64px);
+font-weight: 800;
+line-height: 1.05;
+letter-spacing: -2px;
+margin-bottom: 16px;
+}
+
+h1 span {
+background: linear-gradient(135deg, var(–accent), var(–accent2));
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+}
+
+.subtitle {
+font-family: ‘Space Mono’, monospace;
+font-size: 13px;
+color: var(–muted);
+letter-spacing: 1px;
+}
+
+/* Timeline */
+.timeline {
+position: relative;
+}
+
+.timeline::before {
+content: ‘’;
+position: absolute;
+left: 28px;
+top: 0;
+bottom: 0;
+width: 1px;
+background: linear-gradient(to bottom, var(–accent), var(–accent2), transparent);
+opacity: 0.4;
+}
+
+/* Step card */
+.step {
+display: flex;
+gap: 28px;
+margin-bottom: 28px;
+animation: fadeUp 0.6s ease both;
+}
+
+.step:nth-child(1) { animation-delay: 0.1s; }
+.step:nth-child(2) { animation-delay: 0.2s; }
+.step:nth-child(3) { animation-delay: 0.3s; }
+.step:nth-child(4) { animation-delay: 0.4s; }
+.step:nth-child(5) { animation-delay: 0.5s; }
+.step:nth-child(6) { animation-delay: 0.6s; }
+.step:nth-child(7) { animation-delay: 0.7s; }
+
+.step-number {
+flex-shrink: 0;
+width: 56px;
+height: 56px;
+border-radius: 50%;
+background: var(–surface);
+border: 2px solid var(–border);
+display: flex;
+align-items: center;
+justify-content: center;
+font-family: ‘Space Mono’, monospace;
+font-size: 13px;
+font-weight: 700;
+color: var(–accent);
+position: relative;
+z-index: 2;
+transition: all 0.3s;
+cursor: pointer;
+}
+
+.step:hover .step-number {
+border-color: var(–accent);
+box-shadow: var(–glow);
+background: rgba(0,245,196,0.08);
+}
+
+.step-card {
+flex: 1;
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: 12px;
+overflow: hidden;
+transition: border-color 0.3s, box-shadow 0.3s;
+cursor: pointer;
+}
+
+.step:hover .step-card {
+border-color: rgba(0,245,196,0.3);
+box-shadow: 0 4px 40px rgba(0,245,196,0.08);
+}
+
+.step-header {
+padding: 20px 24px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 16px;
+}
+
+.step-title-group {
+display: flex;
+align-items: center;
+gap: 14px;
+}
+
+.step-icon {
+font-size: 22px;
+width: 40px;
+text-align: center;
+}
+
+.step-meta {
+display: flex;
+flex-direction: column;
+gap: 2px;
+}
+
+.step-label {
+font-family: ‘Space Mono’, monospace;
+font-size: 10px;
+color: var(–muted);
+letter-spacing: 2px;
+text-transform: uppercase;
+}
+
+.step-title {
+font-size: 18px;
+font-weight: 700;
+letter-spacing: -0.5px;
+}
+
+.chevron {
+color: var(–muted);
+font-size: 18px;
+transition: transform 0.3s;
+flex-shrink: 0;
+}
+
+.step-card.open .chevron { transform: rotate(180deg); }
+
+.step-body {
+display: none;
+padding: 0 24px 24px;
+border-top: 1px solid var(–border);
+}
+
+.step-card.open .step-body { display: block; }
+
+.step-desc {
+font-size: 14px;
+color: #8a9bb8;
+line-height: 1.7;
+padding: 16px 0 20px;
+font-family: ‘Space Mono’, monospace;
+}
+
+/* Topics grid */
+.topics-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+gap: 14px;
+margin-bottom: 20px;
+}
+
+.topic {
+background: rgba(255,255,255,0.02);
+border: 1px solid var(–border);
+border-radius: 8px;
+padding: 14px 16px;
+transition: all 0.2s;
+}
+
+.topic:hover {
+border-color: var(–accent2);
+background: rgba(123,97,255,0.06);
+}
+
+.topic-name {
+font-size: 13px;
+font-weight: 700;
+margin-bottom: 6px;
+letter-spacing: -0.3px;
+}
+
+.topic-detail {
+font-family: ‘Space Mono’, monospace;
+font-size: 11px;
+color: var(–muted);
+line-height: 1.6;
+}
+
+/* Tags */
+.tags {
+display: flex;
+flex-wrap: wrap;
+gap: 8px;
+margin-top: 4px;
+}
+
+.tag {
+font-family: ‘Space Mono’, monospace;
+font-size: 10px;
+padding: 4px 10px;
+border-radius: 4px;
+letter-spacing: 0.5px;
+}
+
+.tag-green { background: rgba(0,245,196,0.1); color: var(–accent); border: 1px solid rgba(0,245,196,0.2); }
+.tag-purple { background: rgba(123,97,255,0.1); color: var(–accent2); border: 1px solid rgba(123,97,255,0.2); }
+.tag-orange { background: rgba(255,107,53,0.1); color: var(–accent3); border: 1px solid rgba(255,107,53,0.2); }
+
+/* Difficulty bar */
+.difficulty-row {
+display: flex;
+align-items: center;
+gap: 12px;
+margin-top: 16px;
+padding-top: 16px;
+border-top: 1px solid var(–border);
+}
+
+.difficulty-label {
+font-family: ‘Space Mono’, monospace;
+font-size: 10px;
+color: var(–muted);
+text-transform: uppercase;
+letter-spacing: 1px;
+white-space: nowrap;
+}
+
+.difficulty-bar {
+flex: 1;
+height: 4px;
+background: var(–border);
+border-radius: 2px;
+overflow: hidden;
+}
+
+.difficulty-fill {
+height: 100%;
+border-radius: 2px;
+background: linear-gradient(90deg, var(–accent), var(–accent2));
+transition: width 0.6s ease;
+}
+
+.duration {
+font-family: ‘Space Mono’, monospace;
+font-size: 10px;
+color: var(–accent);
+white-space: nowrap;
+}
+
+/* Color accents per step */
+.step-1 .step-number { color: #00f5c4; }
+.step-2 .step-number { color: #7b61ff; }
+.step-3 .step-number { color: #ff6b35; }
+.step-4 .step-number { color: #f59e0b; }
+.step-5 .step-number { color: #ec4899; }
+.step-6 .step-number { color: #ef4444; }
+.step-7 .step-number { color: #06b6d4; }
+
+.step-1 .step-title { color: #00f5c4; }
+.step-2 .step-title { color: #7b61ff; }
+.step-3 .step-title { color: #ff6b35; }
+.step-4 .step-title { color: #f59e0b; }
+.step-5 .step-title { color: #ec4899; }
+.step-6 .step-title { color: #ef4444; }
+.step-7 .step-title { color: #06b6d4; }
+
+/* Progress tracker */
+.progress-bar-wrap {
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: 12px;
+padding: 20px 24px;
+margin-bottom: 40px;
+animation: fadeDown 0.8s ease 0.2s both;
+}
+
+.progress-top {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 12px;
+}
+
+.progress-title {
+font-family: ‘Space Mono’, monospace;
+font-size: 11px;
+color: var(–muted);
+letter-spacing: 2px;
+text-transform: uppercase;
+}
+
+.progress-count {
+font-family: ‘Space Mono’, monospace;
+font-size: 13px;
+color: var(–accent);
+}
+
+.progress-track {
+height: 6px;
+background: var(–border);
+border-radius: 3px;
+overflow: hidden;
+}
+
+.progress-fill {
+height: 100%;
+background: linear-gradient(90deg, var(–accent), var(–accent2));
+border-radius: 3px;
+transition: width 0.4s ease;
+width: 0%;
+}
+
+.step-dots {
+display: flex;
+gap: 6px;
+margin-top: 10px;
+}
+
+.dot {
+width: 8px;
+height: 8px;
+border-radius: 50%;
+background: var(–border);
+transition: background 0.3s;
+}
+
+.dot.done { background: var(–accent); }
+
+/* Animations */
+@keyframes fadeDown {
+from { opacity: 0; transform: translateY(-20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeUp {
+from { opacity: 0; transform: translateY(24px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+.timeline::before { left: 20px; }
+.step-number { width: 40px; height: 40px; font-size: 10px; }
+.topics-grid { grid-template-columns: 1fr; }
+h1 { font-size: 32px; }
+}
+
+.complete-badge {
+display: none;
+font-family: ‘Space Mono’, monospace;
+font-size: 10px;
+color: var(–accent);
+border: 1px solid var(–accent);
+padding: 2px 8px;
+border-radius: 4px;
+margin-left: 8px;
+vertical-align: middle;
+}
+
+.step-number.done { background: rgba(0,245,196,0.1); border-color: var(–accent); }
+.step-number.done::after {
+content: ‘✓’;
+position: absolute;
+inset: 0;
+display: flex;
+align-items: center;
+justify-content: center;
+background: rgba(0,245,196,0.15);
+border-radius: 50%;
+font-size: 18px;
+}
+</style>
+
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="badge">// Learning Path · 2026</div>
+    <h1>Agentic AI<br><span>Roadmap</span></h1>
+    <p class="subtitle">7 steps from fundamentals to production</p>
+  </header>
+
+  <!-- Progress -->
+
+  <div class="progress-bar-wrap">
+    <div class="progress-top">
+      <span class="progress-title">// Your Progress</span>
+      <span class="progress-count" id="progressCount">0 / 7 Complete</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <div class="step-dots" id="stepDots"></div>
+  </div>
+
+  <div class="timeline" id="timeline"></div>
+
+</div>
+
+<script>
+const steps = [
+  {
+    num: "01",
+    icon: "🧠",
+    title: "Foundations",
+    desc: "Build your mental model of how LLMs work and how agents think. This is the layer everything else sits on top of.",
+    duration: "1–2 weeks",
+    difficulty: 30,
+    topics: [
+      {
+        name: "LLM Fundamentals",
+        detail: "Prompting, context windows, temperature & sampling, tokens, system vs user roles"
+      },
+      {
+        name: "ReAct Pattern",
+        detail: "Reason + Act loops: how agents interleave thinking with tool use"
+      },
+      {
+        name: "Agent Lifecycle",
+        detail: "Plan → Execute → Reflect cycle; when to stop, retry, or escalate"
+      },
+      {
+        name: "Prompt Engineering",
+        detail: "Chain-of-thought, few-shot, zero-shot, structured output prompting"
+      }
+    ],
+    tags: [["Beginner", "green"], ["Theory", "purple"]]
+  },
+  {
+    num: "02",
+    icon: "⚙️",
+    title: "Core Components",
+    desc: "The building blocks every agent relies on. Learn to wire tools, memory, and state together into a coherent system.",
+    duration: "2–3 weeks",
+    difficulty: 50,
+    topics: [
+      {
+        name: "Tools & Function Calling",
+        detail: "Web search, code execution, external APIs; how to define and parse tool schemas"
+      },
+      {
+        name: "Memory Systems",
+        detail: "In-context (short-term), external databases (semantic search), long-term episodic memory"
+      },
+      {
+        name: "Context Engineering",
+        detail: "State-aware prompts, compressing history, managing the context budget"
+      },
+      {
+        name: "Structured Outputs",
+        detail: "JSON mode, Pydantic schemas, output validation and error recovery"
+      }
+    ],
+    tags: [["Intermediate", "purple"], ["Hands-on", "orange"]]
+  },
+  {
+    num: "03",
+    icon: "🕸️",
+    title: "Orchestration",
+    desc: "Move from single agents to coordinated systems. Design workflows that route tasks, handle state, and involve humans at the right moments.",
+    duration: "2–3 weeks",
+    difficulty: 65,
+    topics: [
+      {
+        name: "LangGraph",
+        detail: "Stateful graphs, conditional routing, checkpointing, branching & merging flows"
+      },
+      {
+        name: "Multi-Agent Systems",
+        detail: "Supervisor + worker pattern, agent-to-agent communication, task delegation"
+      },
+      {
+        name: "Human-in-the-Loop",
+        detail: "Approval gates, interrupts, feedback injection, when to pause for oversight"
+      },
+      {
+        name: "State Management",
+        detail: "Shared state objects, event-driven updates, persistence between runs"
+      }
+    ],
+    tags: [["Intermediate", "purple"], ["Architecture", "green"]]
+  },
+  {
+    num: "04",
+    icon: "📚",
+    title: "RAG & Retrieval",
+    desc: "Give your agents long-term knowledge. Master how to store, chunk, retrieve, and reason over documents at scale.",
+    duration: "2–3 weeks",
+    difficulty: 60,
+    topics: [
+      {
+        name: "Chunking Strategies",
+        detail: "Fixed-size, semantic, hierarchical, and sliding window chunking approaches"
+      },
+      {
+        name: "Advanced RAG",
+        detail: "Re-ranking, HyDE (Hypothetical Document Embeddings), self-RAG, multi-hop retrieval"
+      },
+      {
+        name: "Agentic RAG",
+        detail: "Agents that decide when and what to retrieve based on confidence and context"
+      },
+      {
+        name: "Vector Databases",
+        detail: "Pinecone, Qdrant, Weaviate — indexing, similarity search, metadata filtering"
+      }
+    ],
+    tags: [["Intermediate", "purple"], ["Data", "orange"]]
+  },
+  {
+    num: "05",
+    icon: "🎨",
+    title: "Design Patterns",
+    desc: "Learn reusable behavioral blueprints that solve common agent problems — routing, self-improvement, and recovery.",
+    duration: "2 weeks",
+    difficulty: 70,
+    topics: [
+      {
+        name: "Router Agent",
+        detail: "Classify intent → delegate to specialized sub-agents; confidence thresholds"
+      },
+      {
+        name: "Reflection Agent",
+        detail: "Self-critique loop: generate → evaluate → revise until quality threshold met"
+      },
+      {
+        name: "Plan & Self-Heal",
+        detail: "Plan → Execute → Detect failure → Recover or replan autonomously"
+      },
+      {
+        name: "Parallelization",
+        detail: "Fan-out / fan-in patterns, concurrent tool calls, aggregating parallel results"
+      }
+    ],
+    tags: [["Advanced", "orange"], ["Patterns", "purple"]]
+  },
+  {
+    num: "06",
+    icon: "🛡️",
+    title: "Safety & Eval",
+    desc: "Build trustworthy agents. Add guardrails, measure what matters, and ensure your system behaves as intended.",
+    duration: "1–2 weeks",
+    difficulty: 75,
+    topics: [
+      {
+        name: "Guardrails",
+        detail: "Input/output validation, PII detection, prompt injection defense, content filters"
+      },
+      {
+        name: "Evaluation Metrics",
+        detail: "Trajectory correctness, tool selection accuracy, answer faithfulness, hallucination rate"
+      },
+      {
+        name: "Red Teaming",
+        detail: "Adversarial testing, jailbreak probing, stress-testing edge cases"
+      },
+      {
+        name: "Observability",
+        detail: "Tracing agent steps, logging tool calls, debugging multi-turn failures"
+      }
+    ],
+    tags: [["Advanced", "orange"], ["Critical", "green"]]
+  },
+  {
+    num: "07",
+    icon: "🚀",
+    title: "Production & Ecosystem",
+    desc: "Ship agents that run reliably at scale. Manage latency, cost, and operations on real cloud infrastructure.",
+    duration: "2–3 weeks",
+    difficulty: 85,
+    topics: [
+      {
+        name: "MCP Protocol",
+        detail: "Model Context Protocol: standardized tool servers, plug-and-play integrations"
+      },
+      {
+        name: "Production Ops",
+        detail: "Latency optimization, token cost management, rate limits, retries, fallbacks"
+      },
+      {
+        name: "Cloud Platforms",
+        detail: "AWS Bedrock, Google Vertex AI, Claude API — deployment, scaling, managed infra"
+      },
+      {
+        name: "Monitoring & Alerting",
+        detail: "LangSmith, Langfuse, Weights & Biases — dashboards, anomaly detection, SLAs"
+      }
+    ],
+    tags: [["Expert", "orange"], ["Production", "green"]]
+  }
+];
+
+const tagColors = { green: "tag-green", purple: "tag-purple", orange: "tag-orange" };
+const completed = new Set();
+
+function renderDots() {
+  const dotsEl = document.getElementById('stepDots');
+  dotsEl.innerHTML = steps.map((_, i) =>
+    `<div class="dot ${completed.has(i) ? 'done' : ''}" id="dot-${i}"></div>`
+  ).join('');
+}
+
+function updateProgress() {
+  const count = completed.size;
+  document.getElementById('progressCount').textContent = `${count} / 7 Complete`;
+  document.getElementById('progressFill').style.width = `${(count/7)*100}%`;
+  renderDots();
+}
+
+function toggleStep(card, idx) {
+  card.classList.toggle('open');
+}
+
+function toggleDone(numEl, idx, e) {
+  e.stopPropagation();
+  if (completed.has(idx)) {
+    completed.delete(idx);
+    numEl.classList.remove('done');
+  } else {
+    completed.add(idx);
+    numEl.classList.add('done');
+  }
+  updateProgress();
+}
+
+function buildTimeline() {
+  const tl = document.getElementById('timeline');
+  tl.innerHTML = steps.map((step, i) => `
+    <div class="step step-${i+1}">
+      <div class="step-number" id="num-${i}" title="Click to mark done">${step.num}</div>
+      <div class="step-card" id="card-${i}">
+        <div class="step-header">
+          <div class="step-title-group">
+            <div class="step-icon">${step.icon}</div>
+            <div class="step-meta">
+              <span class="step-label">Step ${step.num}</span>
+              <span class="step-title">${step.title}</span>
+            </div>
+          </div>
+          <span class="chevron">▾</span>
+        </div>
+        <div class="step-body">
+          <p class="step-desc">${step.desc}</p>
+          <div class="topics-grid">
+            ${step.topics.map(t => `
+              <div class="topic">
+                <div class="topic-name">${t.name}</div>
+                <div class="topic-detail">${t.detail}</div>
+              </div>
+            `).join('')}
+          </div>
+          <div class="tags">
+            ${step.tags.map(([label, color]) => `<span class="tag ${tagColors[color]}">${label}</span>`).join('')}
+          </div>
+          <div class="difficulty-row">
+            <span class="difficulty-label">Difficulty</span>
+            <div class="difficulty-bar">
+              <div class="difficulty-fill" style="width: ${step.difficulty}%"></div>
+            </div>
+            <span class="duration">${step.duration}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  // Attach events
+  steps.forEach((_, i) => {
+    document.getElementById(`card-${i}`).addEventListener('click', () => {
+      toggleStep(document.getElementById(`card-${i}`), i);
+    });
+    document.getElementById(`num-${i}`).addEventListener('click', (e) => {
+      toggleDone(document.getElementById(`num-${i}`), i, e);
+    });
+  });
+}
+
+buildTimeline();
+renderDots();
+</script>
+
+</body>
+</html>
